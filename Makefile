@@ -1,8 +1,8 @@
-run: down remove_image
-	@docker-compose up -d
+run: clean
+	@docker-compose up -d --force-recreate --build backend
 
-debug: down clean remove_image
-	@docker-compose up -d
+debug: down
+	@docker-compose up -d --force-recreate --build backend
 
 down:
 	@docker-compose down
@@ -10,15 +10,6 @@ down:
 logs:
 	@docker logs backend
 
-clean:
+clean: down
 	@sudo rm -rf data
 	@sudo rm -rf logs
-
-backend_image_name = "management_backend"
-backend_image ="$(shell docker images | grep $(backend_image_name) | awk '{print $$1}')"
-remove_image:
-
-ifeq ($(backend_image),$(backend_image_name))
-	@docker image rm $(backend_image_name)
-endif
-

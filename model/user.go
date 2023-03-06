@@ -8,6 +8,6 @@ type UserSql struct {
 }
 
 type User struct {
-	Username string `json:"username" gorm:"username"`
+	Username string `json:"username" gorm:"username;unique"`
 	Password string `json:"password" gorm:"password"`
 }

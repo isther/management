@@ -1,7 +1,8 @@
 package dao
 
 import (
-	"github.com/isther/clinic/conf"
+	"github.com/isther/management/conf"
+	"github.com/isther/management/model"
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -25,7 +26,12 @@ func initSQL() {
 	}
 
 	// 绑定模型
-	err = DB.AutoMigrate()
+	err = DB.AutoMigrate(&model.UserSql{}, &model.ItemSql{}, &model.InboundSql{}, &model.OutboundSql{})
+	if err != nil {
+		logrus.Fatalln(err)
+	}
+
+	err = DB.AutoMigrate(&model.InBoundPersons{}, &model.OutBoundPersons{}, &model.Units{}, &model.StrongLocation{}, &model.ItemIDs{})
 	if err != nil {
 		logrus.Fatalln(err)
 	}

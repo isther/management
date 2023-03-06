@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/isther/clinic/conf"
-	"github.com/isther/clinic/internal/routers"
+	"github.com/isther/management/conf"
+	"github.com/isther/management/routers"
 	"github.com/sirupsen/logrus"
 )
 
